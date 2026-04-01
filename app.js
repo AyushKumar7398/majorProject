@@ -6,7 +6,8 @@ if(process.env.NODE_ENV != "production"){
 // console.log(process.env.SECRET);
 const express =require("express");
 const app= express();
-let port = 8080;
+// let port = 8080;
+const port = process.env.PORT || 8080;
 const mongoose = require('mongoose');
 // const MONGO_URL ="mongodb://127.0.0.1:27017/wanderlust";
 
@@ -26,9 +27,10 @@ const userRouter = require("./routes/user.js");
 const flash =require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
+
 const User = require("./models/user.js");
-const dns =require("dns");
-dns.setServers(['1.1.1.1', '8.8.8.8']);
+// const dns =require("dns");
+// dns.setServers(['1.1.1.1', '8.8.8.8']);
 main()
 .then(()=>{
     console.log("connected to db")
@@ -54,9 +56,9 @@ app.use(express.static(path.join(__dirname,"/public")));
 
 const store = MongoStore.create({
   mongoUrl: dbUrl,
-//   crypto: {
-//     secret: process.env.SECRET,
-//   },
+  crypto: {
+    secret: process.env.SECRET,
+  },
   touchAfter: 24 * 3600,
   collectionName: "secure_sessions"
 });
