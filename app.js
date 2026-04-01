@@ -10,7 +10,7 @@ let port = 8080;
 const mongoose = require('mongoose');
 // const MONGO_URL ="mongodb://127.0.0.1:27017/wanderlust";
 
- const dbUrl =process.env.ATLASDB_URL;
+const dbUrl =process.env.ATLASDB_URL;
 
 const path= require("path");
 
@@ -36,7 +36,9 @@ main()
 .catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect(dbUrl);
+     await mongoose.connect(dbUrl);
+    //  await mongoose.connect(MONGO_URL);
+
    //await mongoose.connect("mongodb+srv://delta-student:DsGhuujEBOYlw5s9@cluster0.tafwnjl.mongodb.net/wanderlust?retryWrites=true&w=majority")
   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 };
